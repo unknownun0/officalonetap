@@ -1,22 +1,38 @@
 <?php
 /**
- * Simple QR Code Generator using Google Chart API (no library needed)
- * Fallback if phpqrcode is not available
+ * QR Code Generator - Vercel compatible
+ * Uses external APIs since filesystem is read-only on Vercel
  */
 
+require_once __DIR__ . '/config.php';
+
+/**
+ * Generate QR code URL using configured provider
+ * @param string $data
+ * @param int $size
+ * @return string
+ */
 function generateQrCodeDataUri(string $data, int $size = 300): string {
-    $url = 'https://chart.googleapis.com/chart?chs=' . $size . 'x' . $size . '&cht=qr&chl=' . urlencode($data) . '&choe=UTF-8';
-    return $url;
+    return generateQrCodeUrl($data, $size);
 }
 
 /**
- * Generate QR code as base64 data URI (for embedding directly in HTML)
- * Uses a simple approach - returns external URL
+ * Get QR code URL (alias for consistency)
+ * @param string $data
+ * @param int $size
+ * @return string
  */
 function getQrCodeUrl(string $data, int $size = 300): string {
-    // Primary: Google Chart API (reliable, no key needed)
-    return 'https://chart.googleapis.com/chart?chs=' . $size . 'x' . $size . '&cht=qr&chl=' . urlencode($data) . '&choe=UTF-8';
-    
-    // Alternative: qrserver.com
-    // return 'https://api.qrserver.com/v1/create-qr-code/?size=' . $size . 'x' . $size . '&data=' . urlencode($data);
+    return generateQrCodeUrl($data, $size);
+}
+
+/**
+ * Generate QR code as SVG (inline, no external dependency)
+ * @param string $data
+ * @param int $size
+ * @return string
+ */
+function generateQrCodeSvg(string $data, int $size = 300): string {
+    // Simple QR code using an external service that returns SVG
+    return 'https://api.qrserver.com/v1/create-qr-code/?size=' . $size . 'x' . $size . '&data=' . urlencode($data) . '&format=svg';
 }

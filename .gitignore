@@ -1,0 +1,36 @@
+# Dependencies
+/vendor/
+/composer.lock
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Vercel
+.vercel
+
+# PHP
+*.log
+*.cache
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Generated QR codes (local only - not used on Vercel)
+/qr_codes/
+
+# Database
+*.sql
+*.sqlite
+
+# Testing
+/phpunit.xml
+/coverage/

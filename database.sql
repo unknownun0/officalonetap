@@ -59,6 +59,14 @@ CREATE TABLE IF NOT EXISTS messages (
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Sessions table (for database-backed sessions on Vercel/serverless)
+CREATE TABLE IF NOT EXISTS sessions (
+    id VARCHAR(128) NOT NULL PRIMARY KEY,
+    data TEXT NOT NULL,
+    expires INT UNSIGNED NOT NULL,
+    INDEX idx_expires (expires)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- Insert sample admin (password: admin123)
 INSERT INTO admins (email, password_hash) VALUES 
 ('admin@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');

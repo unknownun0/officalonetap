@@ -177,10 +177,6 @@ function renderSocialInputs($socials, $editable = false) {
     $html .= '</div>';
     return $html;
 }
-
-function e($str) {
-    return htmlspecialchars((string)$str, ENT_QUOTES, 'UTF-8');
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">

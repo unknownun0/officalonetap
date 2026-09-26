@@ -97,7 +97,7 @@ $stats = [
 ];
 
 $flashes = getFlashes();
-$accountUrl = APP_URL . '/account.php';
+$accountUrl = appUrl('account.php');
 
 ?>
 <!DOCTYPE html>
