@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum CustomerStatus {
+  pending
+  active
+}
+
+model CustomerToken {
+  id           String         @id @default(cuid())
+  token        String         @unique @db.VarChar(64)
+  status       CustomerStatus @default(pending)
+  fullName     String?        @db.VarChar(255)
+  email        String?        @unique @db.VarChar(255)
+  phone        String?        @db.VarChar(50)
+  passwordHash String?        @db.VarChar(255)
+  createdAt    DateTime       @default(now())
+  activatedAt  DateTime?
+  updatedAt    DateTime       @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("customer_tokens")
+}
